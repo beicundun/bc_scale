@@ -1,0 +1,165 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/bc_scale.js"></script>
+<script type="text/javascript" src="js/bc_library.js"></script>
+<script type="text/javascript" src="js/jquery.easing.js"></script>
+<style type="text/css">
+html {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	background: #ffffff url(images/line2.gif) no-repeat center center;
+}
+
+.bc-scale {
+	width: 10px;
+	height: 10px;
+	overflow: visible;
+	position: absolute;
+}
+
+.bc-scale img:hover {
+	opacity: 0.7;
+}
+
+#logo1 img,
+#logo2 img,
+#logo3 img {
+	position: absolute;
+	left: -102px;
+	top: -350px;
+	cursor: pointer;
+}
+</style>
+<script type="text/javascript">
+var radian = 0;
+
+var theta = 0;
+var sin = 0;
+var cos = 0;
+var x = 0;
+var z = 0;
+var r = 200;
+
+var theta2 = 2.2;
+var sin2 = 0;
+var cos2 = 0;
+var x2 = 0;
+var z2 = 0;
+var r2 = 200;
+
+var theta3 = 4.4;
+var sin3 = 0;
+var cos3 = 0;
+var x3 = 0;
+var z3 = 0;
+var r3 = 200;
+
+setInterval(function(){
+	sin = Math.sin(theta);
+	cos = Math.cos(theta);
+	x = cos * r;
+	z = sin * r + r;
+	//console.log(sin);
+	theta += 0.02;
+	
+	sin2 = Math.sin(theta2);
+	cos2 = Math.cos(theta2);
+	x2 = cos2 * r;
+	z2 = sin2 * r + r;
+	//console.log(sin);
+	theta2 += 0.02;
+	
+	sin3 = Math.sin(theta3);
+	cos3 = Math.cos(theta3);
+	x3 = cos3 * r;
+	z3 = sin3 * r + r;
+	//console.log(sin);
+	theta3 += 0.02;
+	
+}, 20);
+//console.log(newAry);
+
+$.fx.interval = 20;
+var logo1;
+var logo2;
+var logo3;
+
+$(function(){
+	logo1 = new BC_Scale('#logo1');
+	logo1.setVp();
+	logo1.fl = 250;
+	logo1.render3d(x, 50, z);
+	var timer = setInterval(function(){
+		var _x = Math.cos(theta) * 500;
+		logo1.render3d(_x, 50, z);
+	}, 20);
+	
+	logo2 = new BC_Scale('#logo2');
+	logo2.setVp();
+	logo2.fl = 250;
+	logo2.render3d(x2, 50, z2);
+	var timer = setInterval(function(){
+		var _x = Math.cos(theta2) * 500;
+		logo2.render3d(_x, 50, z2);
+	}, 20);
+	
+	logo3 = new BC_Scale('#logo3');
+	logo3.setVp();
+	logo3.fl = 250;
+	logo3.render3d(x3, 50, z3);
+	var timer = setInterval(function(){
+		var _x = Math.cos(theta3) * 500;
+		logo3.render3d(_x, 50, z3);
+	}, 20);
+	
+	var logos = [logo1, logo2, logo3];
+	
+	setInterval(function(){
+		var newLogos = BC.asort(logos, 'z');
+		var zIndex = 100;
+		for (var i=0; i<newLogos.length; i++) {
+			//console.log(i);
+			newLogos[i].box.css('z-index', zIndex);
+			zIndex += 10;
+		}
+	}, 100);
+	
+	// 小さい順に並べ替える
+	/*
+	function asort(array, key) {
+		array.sort(
+			// この匿名関数が比較関数
+			function(a, b){
+				if (a[key] < b[key]) {
+					return 1;
+				}
+				else {
+					return -1;
+				}		
+			}
+		);
+		return array;
+	}
+	*/
+
+});
+
+</script>
+<title></title>
+</head>
+<body>
+<div id="logo1" class="bc-scale">
+<img src="images/model.png" width="204" height="700" />
+</div>
+<div id="logo2" class="bc-scale">
+<img src="images/model.png" width="204" height="700" />
+</div>
+<div id="logo3" class="bc-scale">
+<img src="images/model.png" width="204" height="700" />
+</div>
+</body>
+</html>

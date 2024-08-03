@@ -1,0 +1,170 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/bc_scale.js"></script>
+<script type="text/javascript" src="js/bc_library.js"></script>
+<script type="text/javascript" src="js/jquery.easing.js"></script>
+<style type="text/css">
+html {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	background: #ffffff url(images/line.gif) no-repeat center center;
+}
+
+.bc-scale {
+	width: 10px;
+	height: 10px;
+	overflow: visible;
+	position: absolute;
+}
+
+.bc-scale a {
+	display: block;
+	position: absolute;
+}
+
+#logo1 {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+}
+
+#logo2 {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+}
+
+
+#logo1 img {
+	position: absolute;
+	left: -70px;
+	top: -75px;
+}
+</style>
+<script type="text/javascript">
+var ary = [1,4,6,22,86];
+var newAry = BC.getRandomArray(ary);
+//console.log(newAry);
+
+$.fx.interval = 20;
+var logo1;
+var isBack = false;
+var logo2;
+var isBack2 = true;
+var logo3;
+var isBack3 = true;
+
+$(function(){
+	logo1 = new BC_Scale('#logo1');
+	logo1.setVp();
+	logo1.fl = 500;
+	logo1.render3d(-200, 0, -500);
+	//$('html').mousemove(setValues);
+	var timer = setInterval(function(){
+		if (isBack) {
+			if (logo1.z >= -500) {
+				logo1.z -= 30;
+				logo1.render3d(-200, 0, logo1.z);
+			}
+			else {
+				isBack = false;
+			}
+		}
+		else {
+			if (logo1.z <= 2000) {
+				logo1.z += 30;
+				logo1.render3d(-200, 0, logo1.z);
+			}
+			else {
+				isBack = true;
+			}
+		}
+	}, 20);
+	
+	logo2 = new BC_Scale('#logo2');
+	logo2.setVp();
+	logo2.fl = 500;
+	logo2.render3d(500, -300, 500);
+	//$('html').mousemove(setValues);
+	var timer = setInterval(function(){
+		if (isBack2) {
+			if (logo2.z >= -500) {
+				logo2.z -= 20;
+				logo2.render3d(500, -300, logo2.z);
+			}
+			else {
+				isBack2 = false;
+			}
+		}
+		else {
+			if (logo2.z <= 2000) {
+				logo2.z += 20;
+				logo2.render3d(500, -300, logo2.z);
+			}
+			else {
+				isBack2 = true;
+			}
+		}
+	}, 20);
+	
+	logo3 = new BC_Scale('#logo3');
+	logo3.setVp();
+	logo3.fl = 500;
+	logo3.render3d(200, 300, 1000);
+	//$('html').mousemove(setValues);
+	var timer = setInterval(function(){
+		if (isBack3) {
+			if (logo3.z >= -500) {
+				logo3.z -= 20;
+				logo3.render3d(200, 300, logo3.z);
+			}
+			else {
+				isBack3 = false;
+			}
+		}
+		else {
+			if (logo3.z <= 2000) {
+				logo3.z += 20;
+				logo3.render3d(200, 300, logo3.z);
+			}
+			else {
+				isBack3 = true;
+			}
+		}
+	}, 20);
+	
+	$(window).resize(function(evt){
+		//console.log(logo3.vpX);
+	});
+});
+
+function setValues(evt) {
+	var _mouseX = evt.pageX;
+	var _mouseY = evt.pageY;
+	var yoko = _mouseX * _mouseX;
+	var tate = _mouseY * _mouseY;
+	var naname = Math.floor(Math.sqrt(yoko + tate));
+	var _scale = logo1.getScale3D(logo1.z);
+	var _x = (_mouseX - logo1.vpX) * _scale;
+	var _y = (_mouseY - logo1.vpY) * _scale;
+	logo1.render3d(_x, _y);
+}
+</script>
+<title></title>
+</head>
+<body>
+<div id="logo1" class="bc-scale">
+<img src="images/logo.png" width="140" height="150" />
+</div>
+<div id="logo2" class="bc-scale">
+<img src="images/logo.png" width="140" height="150" />
+</div>
+<div id="logo3" class="bc-scale">
+<img src="images/logo.png" width="140" height="150" />
+</div>
+</body>
+</html>

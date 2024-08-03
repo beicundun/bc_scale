@@ -1,0 +1,339 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/bc_scale.js"></script>
+<script type="text/javascript" src="js/bc_library.js"></script>
+<script type="text/javascript" src="js/jquery.easing.js"></script>
+<style type="text/css">
+html {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	background: #ffffff url(images/line2.gif) no-repeat center center;
+}
+
+.bc-scale {
+	width: 10px;
+	height: 10px;
+	overflow: visible;
+	position: absolute;
+}
+
+.bc-scale img:hover {
+	opacity: 0.7;
+}
+
+#model1 img,
+#model2 img,
+#model3 img,
+#model4 img,
+#model5 img,
+#model6 img,
+#model7 img,
+#model8 img{
+	position: absolute;
+	left: -102px;
+	top: -350px;
+	cursor: pointer;
+}
+
+
+#voice {
+	width: 10px;
+	height: 10px;
+	overflow: visible;
+	position: absolute;
+	z-index: 500;
+}
+
+#voice img {
+	position: absolute;
+	left: -90px;
+	top: -47px;
+	cursor: pointer;
+}
+</style>
+<script type="text/javascript">
+var radian = 0;
+
+var theta = 0;
+var sin = 0;
+var cos = 0;
+var x = 0;
+var z = 0;
+var r = 200;
+
+var theta2 = 0.89;
+var sin2 = 0;
+var cos2 = 0;
+var x2 = 0;
+var z2 = 0;
+var r2 = 200;
+
+var theta3 = 1.78;
+var sin3 = 0;
+var cos3 = 0;
+var x3 = 0;
+var z3 = 0;
+var r3 = 200;
+
+var theta4 = 2.67;
+var sin4 = 0;
+var cos4 = 0;
+var x4 = 0;
+var z4 = 0;
+var r4 = 200;
+
+var theta5 = 3.56;
+var sin5 = 0;
+var cos5 = 0;
+var x5 = 0;
+var z5 = 0;
+var r5 = 200;
+
+var theta6 = 3.56;
+var sin6 = 0;
+var cos6 = 0;
+var x6 = 0;
+var z6 = 0;
+var r6 = 200;
+
+var theta7 = 4.45;
+var sin7 = 0;
+var cos7 = 0;
+var x7 = 0;
+var z7 = 0;
+var r7 = 200;
+
+var theta8 = 5.34;
+var sin8 = 0;
+var cos8 = 0;
+var x8 = 0;
+var z8 = 0;
+var r8 = 200;
+
+setInterval(function(){
+	sin = Math.sin(theta);
+	cos = Math.cos(theta);
+	x = cos * r;
+	z = sin * r + r;
+	//console.log(sin);
+	theta += 0.01;
+	
+	sin2 = Math.sin(theta2);
+	cos2 = Math.cos(theta2);
+	x2 = cos2 * r;
+	z2 = sin2 * r + r;
+	//console.log(sin);
+	theta2 += 0.01;
+	
+	sin3 = Math.sin(theta3);
+	cos3 = Math.cos(theta3);
+	x3 = cos3 * r;
+	z3 = sin3 * r + r;
+	//console.log(sin);
+	theta3 += 0.01;
+	
+	sin4 = Math.sin(theta4);
+	cos4 = Math.cos(theta4);
+	x4 = cos4 * r;
+	z4 = sin4 * r + r;
+	//console.log(sin);
+	theta4 += 0.01;
+	
+	sin5 = Math.sin(theta5);
+	cos5 = Math.cos(theta5);
+	x5 = cos5 * r;
+	z5 = sin5 * r + r;
+	//console.log(sin);
+	theta5 += 0.01;
+	
+	sin6 = Math.sin(theta6);
+	cos6 = Math.cos(theta6);
+	x6 = cos6 * r;
+	z6 = sin6 * r + r;
+	//console.log(sin);
+	theta6 += 0.01;
+	
+	sin7 = Math.sin(theta7);
+	cos7 = Math.cos(theta7);
+	x7 = cos7 * r;
+	z7 = sin7 * r + r;
+	//console.log(sin);
+	theta7 += 0.01;
+	
+	sin8 = Math.sin(theta8);
+	cos8 = Math.cos(theta8);
+	x8 = cos8 * r;
+	z8 = sin8 * r + r;
+	//console.log(sin);
+	theta8 += 0.01;
+	
+	
+}, 20);
+//console.log(newAry);
+
+$.fx.interval = 20;
+var model1;
+var model2;
+var model3;
+var model4;
+var model5;
+var model6;
+var model7;
+var model8;
+
+var voice;
+
+$(function(){
+	model1 = new BC_Scale('#model1', true);
+	model1.setVp();
+	model1.fl = 250;
+	model1.render3d(x, 50, z);
+	var timer = setInterval(function(){
+		var _x = Math.cos(theta) * 500;
+		model1.render3d(_x, 50, z);
+	}, 20);
+	
+	model2 = new BC_Scale('#model2', true);
+	model2.setVp();
+	model2.fl = 250;
+	model2.render3d(x2, 50, z2);
+	var timer = setInterval(function(){
+		var _x = Math.cos(theta2) * 500;
+		model2.render3d(_x, 50, z2);
+	}, 20);
+	
+	model3 = new BC_Scale('#model3', true);
+	model3.setVp();
+	model3.fl = 250;
+	model3.render3d(x3, 50, z3);
+	var timer = setInterval(function(){
+		var _x = Math.cos(theta3) * 500;
+		model3.render3d(_x, 50, z3);
+	}, 20);
+	
+	model4 = new BC_Scale('#model4', true);
+	model4.setVp();
+	model4.fl = 250;
+	model4.render3d(x4, 50, z4);
+	var timer = setInterval(function(){
+		var _x = Math.cos(theta4) * 500;
+		model4.render3d(_x, 50, z4);
+	}, 20);
+	
+	model5 = new BC_Scale('#model5', true);
+	model5.setVp();
+	model5.fl = 250;
+	model5.render3d(x5, 50, z5);
+	var timer = setInterval(function(){
+		var _x = Math.cos(theta5) * 500;
+		model5.render3d(_x, 50, z5);
+	}, 20);
+	
+	model6 = new BC_Scale('#model6', true);
+	model6.setVp();
+	model6.fl = 250;
+	model6.render3d(x6, 50, z6);
+	var timer = setInterval(function(){
+		var _x = Math.cos(theta6) * 500;
+		model6.render3d(_x, 50, z6);
+	}, 20);
+	
+	model7 = new BC_Scale('#model7', true);
+	model7.setVp();
+	model7.fl = 250;
+	model7.render3d(x7, 50, z7);
+	var timer = setInterval(function(){
+		var _x = Math.cos(theta7) * 500;
+		model7.render3d(_x, 50, z7);
+	}, 20);
+	
+	model8 = new BC_Scale('#model8', true);
+	model8.setVp();
+	model8.fl = 250;
+	model8.render3d(x8, 50, z8);
+	var timer = setInterval(function(){
+		var _x = Math.cos(theta8) * 500;
+		model8.render3d(_x, 50, z8);
+	}, 20);
+	
+	voice = new BC_Scale('#voice', false);
+	voice.setVp();
+	voice.fl = 250;
+	voice.render3d(0, 0, 0);
+	
+	voice.togetherOn(model8, -70, -320, 20);
+	model8.box.click(function(evt){
+		voice.togetherOff(model8);
+	});
+	
+	var models = [model1, model2, model3, model4, model5, model6, model7, model8];
+	
+	setInterval(function(){
+		var newModels = BC.asort(models, 'z');
+		var zIndex = 100;
+		for (var i=0; i<newModels.length; i++) {
+			//console.log(i);
+			newModels[i].box.css('z-index', zIndex);
+			zIndex += 10;
+		}
+	}, 20);
+	
+	// 小さい順に並べ替える
+	/*
+	function asort(array, key) {
+		array.sort(
+			// この匿名関数が比較関数
+			function(a, b){
+				if (a[key] < b[key]) {
+					return 1;
+				}
+				else {
+					return -1;
+				}		
+			}
+		);
+		return array;
+	}
+	*/
+
+});
+
+</script>
+<title></title>
+</head>
+<body>
+<div id="voice">
+<img src="images/voice.png" width="89" height="71" />
+</div>
+
+
+<div id="model1" class="bc-scale">
+<img src="images/model.png" width="204" height="700" />
+</div>
+<div id="model2" class="bc-scale">
+<img src="images/model.png" width="204" height="700" />
+</div>
+<div id="model3" class="bc-scale">
+<img src="images/model.png" width="204" height="700" />
+</div>
+<div id="model4" class="bc-scale">
+<img src="images/model.png" width="204" height="700" />
+</div>
+<div id="model5" class="bc-scale">
+<img src="images/model.png" width="204" height="700" />
+</div>
+<div id="model6" class="bc-scale">
+<img src="images/model.png" width="204" height="700" />
+</div>
+<div id="model7" class="bc-scale">
+<img src="images/model.png" width="204" height="700" />
+</div>
+<div id="model8" class="bc-scale">
+<img src="images/model.png" width="204" height="700" />
+</div>
+</body>
+</html>

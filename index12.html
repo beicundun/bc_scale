@@ -1,0 +1,200 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/bc_scale.js"></script>
+<script type="text/javascript" src="js/bc_library.js"></script>
+<script type="text/javascript" src="js/jquery.easing.js"></script>
+<style type="text/css">
+html {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	background: #ffffff url(images/line.gif) no-repeat center center;
+}
+
+.bc-scale {
+	width: 10px;
+	height: 10px;
+	overflow: visible;
+	position: absolute;
+}
+
+.bc-scale a {
+	display: block;
+	position: absolute;
+}
+
+#logo1, #logo2, #logo3 {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+}
+
+#logo1 img,
+#logo2 img,
+#logo3 img {
+	position: absolute;
+	left: -70px;
+	top: -75px;
+}
+</style>
+<script type="text/javascript">
+var radian = 0;
+var theta = 0;
+var sin = 0;
+var cos = 0;
+var x = 0;
+var z = 0;
+var r = 1000;
+
+setInterval(function(){
+	sin = Math.sin(theta);
+	cos = Math.cos(theta);
+	x = cos * r;
+	z = sin * r + r;
+	//console.log(sin);
+	theta += 0.05;
+}, 20);
+//console.log(newAry);
+
+$.fx.interval = 20;
+var logo1;
+
+$(function(){
+	logo1 = new BC_Scale('#logo1', true);
+	logo1.setVp();
+	logo1.fl = 250;
+	logo1.render3d(x, 0, z);
+	//$('html').mousemove(setValues);
+	var timer = setInterval(function(){
+		logo1.render3d(x, 0, z);
+	}, 20);
+
+	$(window).resize(function(evt){
+		//console.log(logo3.vpX);
+	});
+});
+
+$(function(){
+	logo4 = new BC_Scale('#logo4', true);
+	logo4.setVp();
+	logo4.fl = 250;
+	logo4.render3d(x, 0, z);
+	//$('html').mousemove(setValues);
+	var timer = setInterval(function(){
+		cos = Math.cos(theta);
+		var _x = cos * 2000;
+		logo4.render3d(_x, 50, z);
+	}, 20);
+
+	$(window).resize(function(evt){
+		//console.log(logo3.vpX);
+	});
+});
+
+
+var theta2 = 0;
+var sin2 = 0;
+setInterval(function(){
+	sin2 = Math.sin(theta2)*100;
+	theta2 += 0.1;
+}, 20);
+//console.log(newAry);
+var logo2;
+var isBack = false;
+
+$(function(){
+	logo2 = new BC_Scale('#logo2', true);
+	logo2.setVp();
+	logo2.fl = 500;
+	logo2.render3d(-200, sin2, -500);
+	//$('html').mousemove(setValues);
+	var timer = setInterval(function(){
+		if (isBack) {
+			if (logo2.z >= -500) {
+				logo2.z -= 30;
+				logo2.render3d(-200, sin2, logo2.z);
+			}
+			else {
+				isBack = false;
+			}
+		}
+		else {
+			if (logo2.z <= 2000) {
+				logo2.z += 30;
+				logo2.render3d(-200, sin2, logo2.z);
+			}
+			else {
+				isBack = true;
+			}
+		}
+	}, 20);
+
+	$(window).resize(function(evt){
+		//console.log(logo3.vpX);
+	});
+});
+
+(function(){
+	var theta3 = 0;
+	var sin3 = 0;
+	setInterval(function(){
+		sin3 = Math.sin(theta3)*100;
+		theta3 += 0.1;
+	}, 20);
+	//console.log(newAry);
+	var logo3;
+	var isBack3 = false;
+	
+	$(function(){
+		logo3 = new BC_Scale('#logo3', true);
+		logo3.setVp();
+		logo3.fl = 250;
+		logo3.render3d(200, -100, 1000);
+		//$('html').mousemove(setValues);
+		var timer = setInterval(function(){
+			if (isBack3) {
+				if (logo3.z >= -500) {
+					logo3.z -= 30;
+					logo3.render3d(200, -100, logo3.z);
+				}
+				else {
+					isBack3 = false;
+				}
+			}
+			else {
+				if (logo3.z <= 2000) {
+					logo3.z += 30;
+					logo3.render3d(200, -100, logo3.z);
+				}
+				else {
+					isBack3 = true;
+				}
+			}
+		}, 20);
+	
+		$(window).resize(function(evt){
+			//console.log(logo3.vpX);
+		});
+	});
+})();
+</script>
+<title></title>
+</head>
+<body>
+<div id="logo1" class="bc-scale">
+<img src="images/logo.png" width="140" height="150" />
+</div>
+<div id="logo2" class="bc-scale">
+<img src="images/logo.png" width="140" height="150" />
+</div>
+<div id="logo3" class="bc-scale">
+<img src="images/logo.png" width="140" height="150" />
+</div>
+<div id="logo4" class="bc-scale">
+<img src="images/logo.png" width="140" height="150" />
+</div>
+</body>
+</html>
